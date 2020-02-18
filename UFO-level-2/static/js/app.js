@@ -19,7 +19,11 @@ buidTable(tableData);
 var button = d3.select("#filter-btn");
 button.on("click", filterData);
 
+
 function filterData() {
+    var filters = []
+
+    console.log(Object.entries(filters))
     var dateInput = d3.select("#datetime");
     var dateInputValue = dateInput.property("value");
     var cityInput = d3.select("#city");
@@ -30,28 +34,34 @@ function filterData() {
     var countryInputValue = countryInput.property("value");
     var shapeInput = d3.select("#shape");
     var shapeInputValue = shapeInput.property("value");
-    console.log(shapeInputValue)
-    // if (dateInputValue !== '' ){
-    //     var filtered = tableData.filter(ufo => ufo.datetime === dateInputValue);
-    //     buidTable(filtered);
-    // }
-    // else if (cityInputValue !== '') {
-    //     var filtered = tableData.filter(ufo => ufo.city === cityInputValue);
-    //     buidTable(filtered);
-    // }
-    // else if (stateInputValue !== '') {
-    //     var filtered = tableData.filter(ufo => ufo.state === stateInputValue);
-    //     buidTable(filtered);
-    // }
-    // else if  (countryInputValue !== '') {
-    //     var filtered = tableData.filter(ufo => ufo.country === countryInputValue);
-    //     buidTable(filtered);
-    // }
-    // else (shapeInputValue !== '') { 
-    //     var filtered = tableData.filter(ufo => ufo.shape === shapeInputValue);
-    //     buidTable(filtered);
-    // }
+    
+    // var filtered= tableData.filter(ufo => (ufo.datetime === dateInputValue || ufo.city === cityInputValue || ufo.state === stateInputValue ||ufo.country === countryInputValue ||ufo.shape === shapeInputValue)  );
+    // buidTable(filtered)
+    
+    if (dateInputValue !== '' ) {
+        filters.datetime= (dateInputValue);
+    }
+    if (cityInputValue !== '' ) {
+        filters.city= (cityInputValue);
+    }
+    if (stateInputValue !== '') {
+        filters.state= (stateInputValue);
+    }
+    if (countryInputValue !== '') {
+        filters.country = (countryInputValue);
+    }
+    if (shapeInputValue !== '') { 
+        filters.shape = (shapeInputValue);
+    }
+    console.log(Object.entries(filters))
+    Object.entries(filters).forEach(([key,value]) => {
+        var newTable = tableData.filter(ufo => ufo[key] === value);
+        console.log(newTable)
+        buidTable(newTable)
+    })
 }
+    
 
+     
 
 
