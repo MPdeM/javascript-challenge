@@ -21,9 +21,8 @@ button.on("click", filterData);
 
 
 function filterData() {
-    var filters = []
-
-    console.log(Object.entries(filters))
+    var filters = {}
+   //    console.log(Object.entries(filters))
     var dateInput = d3.select("#datetime");
     var dateInputValue = dateInput.property("value");
     var cityInput = d3.select("#city");
@@ -53,12 +52,14 @@ function filterData() {
     if (shapeInputValue !== '') { 
         filters.shape = (shapeInputValue);
     }
-    console.log(Object.entries(filters))
+    // console.log(Object.entries(filters))
+    var newTable = tableData
+
     Object.entries(filters).forEach(([key,value]) => {
-        var newTable = tableData.filter(ufo => ufo[key] === value);
+        newTable = newTable.filter(ufo => ufo[key] === value);
         console.log(newTable)
-        buidTable(newTable)
     })
+    buidTable(newTable)
 }
     
 
